@@ -1,5 +1,6 @@
 package com.heavin.criminalintent
 
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +34,12 @@ class CrimeHolderWithoutPolice(
 ) : CrimeHolder(bindingCrime) {
     override fun bind(crime: Crime) {
         bindingCrime.crimeTitle.text = crime.title
-        bindingCrime.crimeDate.text = crime.date.toString()
+
+//        CHAPTER 11 CHALLENGE
+//        bindingCrime.crimeDate.text = crime.date.toString()
+        bindingCrime.crimeDate.text = DateFormat.format("MMM dd, yyyy.", crime.date)
+//
+
         bindingCrime.root.setOnClickListener {
             Toast.makeText(
                 bindingCrime.root.context,
@@ -55,7 +61,11 @@ class CrimeHolderWithPolice(
 ) : CrimeHolder(bindingCrimePolice) {
     override fun bind(crime: Crime) {
         bindingCrimePolice.crimeTitle.text = crime.title
-        bindingCrimePolice.crimeDate.text = crime.date.toString()
+        
+//      CHAPTER 11 CHALLENGE
+//      bindingCrime.crimeDate.text = crime.date.toString()
+        bindingCrimePolice.crimeDate.text = DateFormat.format("MMM dd, yyyy.", crime.date)
+//
         bindingCrimePolice.root.setOnClickListener {
             Toast.makeText(
                 bindingCrimePolice.root.context,
