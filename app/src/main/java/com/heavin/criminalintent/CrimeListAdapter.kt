@@ -11,24 +11,12 @@ import com.heavin.criminalintent.databinding.ListItemCrimeBinding
 import com.heavin.criminalintent.databinding.ListItemCrimePoliceBinding
 
 open class CrimeHolder (
-    //private val binding: ListItemCrimeBinding
     private val binding: ViewBinding
 ) : RecyclerView.ViewHolder(binding.root) {
     open fun bind(crime: Crime) {
-//        binding.crimeTitle.text = crime.title
-//        binding.crimeDate.text = crime.date.toString()
-//
-//        binding.root.setOnClickListener {
-//            Toast.makeText(
-//                binding.root.context,
-//                "${crime.title} clicked!",
-//                Toast.LENGTH_SHORT
-//            ).show()
-//        }
     }
 }
 
-//EXERCISE 2B - MAKE TWO CLASSES - ONE FOR POLICE, ONE FOR NO POLICE
 class CrimeHolderWithoutPolice(
     private val bindingCrime: ListItemCrimeBinding
 ) : CrimeHolder(bindingCrime) {
@@ -99,7 +87,6 @@ class CrimeListAdapter (
         }
     }
 
-//    EXERCISE 2B
     override fun getItemViewType(position: Int): Int {
         if (crimes[position].requiresPolice) {
             return 1
