@@ -22,12 +22,7 @@ class CrimeHolderWithoutPolice(
 ) : CrimeHolder(bindingCrime) {
     override fun bind(crime: Crime) {
         bindingCrime.crimeTitle.text = crime.title
-
-//        CHAPTER 11 CHALLENGE
-//        bindingCrime.crimeDate.text = crime.date.toString()
         bindingCrime.crimeDate.text = DateFormat.format("MMM dd, yyyy.", crime.date)
-//
-
         bindingCrime.root.setOnClickListener {
             Toast.makeText(
                 bindingCrime.root.context,
@@ -49,11 +44,7 @@ class CrimeHolderWithPolice(
 ) : CrimeHolder(bindingCrimePolice) {
     override fun bind(crime: Crime) {
         bindingCrimePolice.crimeTitle.text = crime.title
-        
-//      CHAPTER 11 CHALLENGE
-//      bindingCrime.crimeDate.text = crime.date.toString()
         bindingCrimePolice.crimeDate.text = DateFormat.format("MMM dd, yyyy.", crime.date)
-//
         bindingCrimePolice.root.setOnClickListener {
             Toast.makeText(
                 bindingCrimePolice.root.context,
