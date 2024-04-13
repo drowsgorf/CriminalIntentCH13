@@ -10,82 +10,111 @@ import androidx.viewbinding.ViewBinding
 import com.heavin.criminalintent.databinding.ListItemCrimeBinding
 import com.heavin.criminalintent.databinding.ListItemCrimePoliceBinding
 
-open class CrimeHolder (
-    private val binding: ViewBinding
+//open class CrimeHolder (
+//    private val binding: ViewBinding
+//) : RecyclerView.ViewHolder(binding.root) {
+//    open fun bind(crime: Crime) {
+//    }
+//}
+class CrimeHolder (
+    private val binding: ListItemCrimeBinding
 ) : RecyclerView.ViewHolder(binding.root) {
-    open fun bind(crime: Crime) {
-    }
-}
+    fun bind(crime: Crime) {
+        binding.crimeTitle.text = crime.title
+        binding.crimeDate.text = crime.date.toString()
 
-class CrimeHolderWithoutPolice(
-    private val bindingCrime: ListItemCrimeBinding
-) : CrimeHolder(bindingCrime) {
-    override fun bind(crime: Crime) {
-        bindingCrime.crimeTitle.text = crime.title
-        bindingCrime.crimeDate.text = DateFormat.format("MMM dd, yyyy.", crime.date)
-        bindingCrime.root.setOnClickListener {
+        binding.root.setOnClickListener {
             Toast.makeText(
-                bindingCrime.root.context,
+                binding.root.context,
                 "${crime.title} clicked!",
                 Toast.LENGTH_SHORT
             ).show()
         }
 
-        bindingCrime.crimeSolved.visibility = if (crime.isSolved) {
+        binding.crimeSolved.visibility = if (crime.isSolved) {
             View.VISIBLE
         } else {
             View.GONE
         }
     }
 }
-
-class CrimeHolderWithPolice(
-    private val bindingCrimePolice: ListItemCrimePoliceBinding
-) : CrimeHolder(bindingCrimePolice) {
-    override fun bind(crime: Crime) {
-        bindingCrimePolice.crimeTitle.text = crime.title
-        bindingCrimePolice.crimeDate.text = DateFormat.format("MMM dd, yyyy.", crime.date)
-        bindingCrimePolice.root.setOnClickListener {
-            Toast.makeText(
-                bindingCrimePolice.root.context,
-                "${crime.title} clicked!",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-    }
-}
+//class CrimeHolderWithoutPolice(
+//    private val bindingCrime: ListItemCrimeBinding
+//) : CrimeHolder(bindingCrime) {
+//    override fun bind(crime: Crime) {
+//        bindingCrime.crimeTitle.text = crime.title
+//        bindingCrime.crimeDate.text = DateFormat.format("MMM dd, yyyy.", crime.date)
+//        bindingCrime.root.setOnClickListener {
+//            Toast.makeText(
+//                bindingCrime.root.context,
+//                "${crime.title} clicked!",
+//                Toast.LENGTH_SHORT
+//            ).show()
+//        }
+//
+//        bindingCrime.crimeSolved.visibility = if (crime.isSolved) {
+//            View.VISIBLE
+//        } else {
+//            View.GONE
+//        }
+//    }
+//}
+//
+//class CrimeHolderWithPolice(
+//    private val bindingCrimePolice: ListItemCrimePoliceBinding
+//) : CrimeHolder(bindingCrimePolice) {
+//    override fun bind(crime: Crime) {
+//        bindingCrimePolice.crimeTitle.text = crime.title
+//        bindingCrimePolice.crimeDate.text = DateFormat.format("MMM dd, yyyy.", crime.date)
+//        bindingCrimePolice.root.setOnClickListener {
+//            Toast.makeText(
+//                bindingCrimePolice.root.context,
+//                "${crime.title} clicked!",
+//                Toast.LENGTH_SHORT
+//            ).show()
+//        }
+//    }
+//}
 
 
 class CrimeListAdapter (
     private val crimes: List<Crime>
 ) : RecyclerView.Adapter<CrimeHolder>() {
 
+//    override fun onCreateViewHolder(
+//        parent: ViewGroup,
+//        viewType: Int
+//    ): CrimeHolder {
+//        val inflater = LayoutInflater.from(parent.context)
+//        //val binding = ListItemCrimeBinding.inflate(inflater, parent, false)
+//        //return CrimeHolder(binding)
+//
+//        if (viewType == 1) {
+//            val binding = ListItemCrimeBinding.inflate(inflater, parent, false)
+//            return CrimeHolderWithoutPolice(binding)
+//        }
+//        else {
+//            val binding = ListItemCrimePoliceBinding.inflate(inflater, parent, false)
+//            return CrimeHolderWithPolice(binding)
+//        }
+//    }
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): CrimeHolder {
         val inflater = LayoutInflater.from(parent.context)
-        //val binding = ListItemCrimeBinding.inflate(inflater, parent, false)
-        //return CrimeHolder(binding)
-
-        if (viewType == 1) {
-            val binding = ListItemCrimeBinding.inflate(inflater, parent, false)
-            return CrimeHolderWithoutPolice(binding)
-        }
-        else {
-            val binding = ListItemCrimePoliceBinding.inflate(inflater, parent, false)
-            return CrimeHolderWithPolice(binding)
-        }
+        val binding = ListItemCrimeBinding.inflate(inflater, parent, false)
+        return CrimeHolder(binding)
     }
 
-    override fun getItemViewType(position: Int): Int {
-        if (crimes[position].requiresPolice) {
-            return 1
-        }
-        else {
-            return 0
-        }
-    }
+//    override fun getItemViewType(position: Int): Int {
+//        if (crimes[position].requiresPolice) {
+//            return 1
+//        }
+//        else {
+//            return 0
+//        }
+//    }
 
     override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
         val crime = crimes[position]
